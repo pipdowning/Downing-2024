@@ -1,0 +1,2511 @@
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+Data extraction file for:
+
+	MICHENER'S GROUP SIZE PARADOX IN COOPERATIVELY BREEDING BIRDS
+
+Author: Philip A. Downing
+Contact: philip.downing@oulu.fi
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+varianceEffect <- function(se, n){(se*sqrt(n))^2}
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+		### SEYCHELLES WARBLER Acrocephalus sechellensis ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Borger et al. 2023 ##
+
+location: Cousin Island (4°20' S, 55°40' E)
+years: December 1995 to June 2016
+breeding season / study period: June to October (major breeding season)
+
+Reproductive success measure: 'the number of offspring produced per group per year'
+
+Data from supplement: https://dataverse.nl/dataset.xhtml?persistentId=doi:10.34894/AKUSMG
+'NROffspringDataset.csv', I edited this by
+Step 1: remove 'Group' = 685 rows (these are groups with helpers that don't help)
+Step 2: remove any NAs = 86 rows
+Step 3: only keep 'Year', 'NrOffspring', 'GroupSize'
+This treats breeding group ID and territory ID as independent
+I then saved this file as a .csv and read it into R to calculate yearly means for pairs and groups
+
+### R CODE ###
+
+data <- read.csv(".../NRoffspring_trimmed.csv")
+head(data)
+round(tapply(data$NrOffspring, list(data$GroupSize), FUN=mean), 2)
+round(tapply(data$NrOffspring, list(data$GroupSize), FUN=sd), 2)
+round(tapply(data$NrOffspring, list(data$GroupSize), FUN=var), 2)
+tapply(data$NrOffspring, list(data$GroupSize), FUN=length)
+
+pairX: 0.32
+pairSD: 0.58
+pairVar: 0.34
+pairN: 1409
+
+trioX: 0.73
+trioSD: 0.85
+trioVar: 0.72
+trioN: 231
+
+fourX: 0.85
+fourSD: 0.93
+fourVar: 0.86
+fourN: 110
+
+fiveX: 0.88
+fiveSD: 0.82
+fiveVar: 0.67
+fiveN: 26
+
+sixX: 0.50
+sixSD: 1.22
+sixVar: 1.50
+sixN: 6
+
+Note that data from earlier studies on this species also available
+Used this one as it is more comprehensive
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Brouwer et al. 2006 ##
+
+Study location: Cousin Island
+Study dates: 4 years of data, sometime between 1986 and 2004
+
+Methods text:
+group size = 1 (n = 6); group size 2 (n = 229); group size = 3 (n = 142);group size = 4 (n = 43); group size = 5 (n = 8); group size = 6 (n = 3).
+Total = 229 + 142 + 43 + 8 + 3 = 425
+
+Group size	N	%
+2		229	54
+3		142	33
+4		43	10
+5		8	2
+6		3	1
+
+Note that same study population as reproductive success data.
+Note that only groups >1 entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+		### FLORIDA SCRUB JAY Aphelocoma coerulescens ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Fitzpatrick & Bowman 2016 ##
+
+# Chapter 5 “Florida Scrub Jays”
+
+location: Archbold Biological Station, Florida (27°11' N, 81°21' W)
+years: NA (maybe 1969 to 2013, based on Figure 5.1)
+breeding season / study period: mid-March to mid-June
+
+Figure 5.3 mean annual fledgling production
+
+pairX: 1.4
+pairSD: sqrt(10.4) = 3.2
+pairVar: varianceEffect(0.1, 1038) = 10.4
+pairN: 1038
+
+trioX: = 1.7
+trioSD: sqrt(4.6) = 2.1
+trioVar: varianceEffect(0.1, 456) = 4.6
+trioN: 456
+
+fourX: 1.8
+fourSD: sqrt(2.6) = 1.6
+fourVar: varianceEffect(0.1, 264) = 2.6
+fourN: 264
+
+fiveX: 2.0
+fiveSD: sqrt(6) = 2.5
+fiveVar: varianceEffect(0.2, 150) = 6
+fiveN: 150
+
+sixX: 2.4
+sixSD: sqrt(2.0) = 1.4
+sixVar: varianceEffect(0.2, 51) = 2.0
+sixN: 51
+
+sevenX: 1.0
+sevenSD: sqrt(2.2) = 1.5
+sevenVar: varianceEffect(0.3, 24) = 2.2
+sevenN: 24
+
+note error assumed to be se since similar to Woolfenden & Fitzpatrick 1990
+note that independents and yearlings also reported
+note that 'seven' includes all groups >6
+
+Note that data from earlier studies on this species also available
+Used this one as it is the latest and study dates overlap
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Woolfenden & Fitzpatrick 1990 ##
+
+Study location:
+Study dates:
+
+Fig 8.3
+Total = 243 + 159 + 90 + 34 + 15 + 3 + 1 = 545
+
+Group size	N	%
+2		243	45
+3		159	29
+4		90	16
+5		34	6
+6		15	3
+7		3	0.6
+8		1	0.2
+
+Note that same study population as reproductive success data.
+Note that final group size not entered since group size data limited to group size 7 max
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+			### PIED KINGFISHER Ceryle rudis ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Reyer 1980 ##
+
+location: Winam Gulf, Lake Victoria (0°21' S, 34°18' E) & southern Lake Naivasha (0°21' S, 36°42' E)
+years: 1975-? (X breeding seasons); 1977 only for Lake Naivasha
+breeding season / study period: April to August (from Reyer 1990)
+
+Table 3 (Lake Victoria)
+number of fledged young
+
+pairX: 1.8
+pairSD: 0.6
+pairVar: 0.6^2 = 0.36
+pairN: 14
+
+trioX: 3.6
+trioSD: 0.5
+trioVar: 0.5^2 = 0.25
+trioN: 12
+
+fourX: 4.7
+fourSD: 1.0
+fourVar: 1.0^2 = 1
+fourN:6
+
+note I think this is per nest because the data below it (which is / nest) include this data
+note that the data from Lake Naivasha only include pairs vs. Trios
+note that there are primary and secondary helpers in this species
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Reyer 1980 ##
+
+Study location: Lake Victoria
+Study dates: 1975-? (X breeding seasons)
+
+Table 2
+Total = 14 + 19 + 7 + 1 = 41
+
+Group size	N	%
+2		14	34
+3		19	46
+4		7	17
+5		1	2
+
+Note that same study population as reproductive success data (i.e. Lake Victoria only)
+Note that final group size not entered since group size data limited to group size 4 max
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+		### BROWN TREECREEPER Climacteris picumnus ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Doerr & Doerr 2007 ##
+
+location: Warraderry State Forest, N.S.W, Australia (33°40' S, 148°10' E)
+years: 1995 to 1999 (X breeding seasons)
+breeding season / study period: July to December
+
+Figure 1
+mean annual number of fledglings
+
+pairX: 0.53
+pairSD: sqrt(0.63) = 0.79
+pairVar: varianceEffect(0.1, 63) = 0.63
+pairN: 63
+
+trioX: = 0.77
+trioSD: sqrt(0.83) = 0.91
+trioVar: varianceEffect(0.19, 23) = 0.83
+trioN: 23
+
+fourX: 2.34
+fourSD: sqrt(0.33) = 0.57
+fourVar: varianceEffect(0.33, 3) = 0.33
+fourN: 3
+
+fiveX: 2.21
+fiveSD: sqrt(1.62) = 1.27
+fiveVar: varianceEffect(0.57, 5) = 1.62
+fiveN: 5
+
+sixX: 1.51
+sixSD: sqrt(0.48) = 0.69
+sixVar: varianceEffect(0.49, 2) = 0.48
+sixN: 2
+
+note that number of independent young also reported
+"Annual reproductive success for each territory was recorded in terms of both the number of fledglings produced by all nesting attempts"
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-#
+
+## Doerr & Doerr 2006 ##
+
+Study location: Warraderry State Forest
+Study dates: 1995 to 1999
+
+Fig 1
+Total = 60 + 26 + 5 + 5 + 2 + 2 = 100 (~ 102 - 3 singles)
+
+Group size	N	%
+2		60	60
+3		26	26
+4		5	5
+5		5	5
+6		2	2
+7		2	2
+
+Note that same study population as reproductive success data
+Note that final group size not entered since group size data limited to group size 6 max
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+		### WHITE-WINGED CHOUGH Corcorax melanorhamphos ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Boland et al. 1997 ##
+
+location: Mt. Ainslie and Black Mountain, Australian Capital Territory (36°05' S, 149°15' E)
+years: August 1995 to February 1996 (1 breeding season)
+breeding season / study period: August to February
+
+Figure 4 (control groups only)
+number of fledglings
+
+four <- c(0, 1, 1)
+five <- c(2, 2)
+six <- c(1, 2)
+eight <- c(2, 2)
+
+fourX: 0.67
+fourSD: 0.58
+fourVar: 0.33
+fourN: 3
+
+fiveX: 2
+fiveSD: 0
+fiveVar: 0
+fiveN: 2
+
+sixX: 1.5
+sixSD: 0.71
+sixVar: 0.5
+sixN: 2
+
+eightX: 2
+eightSD: 0
+eightVar: 0
+eightN: 2
+
+note that data from 'fed' groups exclude for consistency with other studies
+since experiment, assume reproductive success is measured per nest / brood
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Rowley 1978 ##
+
+Study location: Geary's Gap, NSW, Australia
+Study dates:
+
+Fig 1
+Total = 2 + 11 + 35 + 44 + 33 + 23 + 18 + 6 + 7 + 5 + 1 + 1 = 186
+
+Group size	N	%
+2		2	1
+3		11	6
+4		35	19
+5		44	24
+6		33	18
+7		23	12
+8		18	10
+9		6	3
+10		7	4
+11		5	2
+12		1	0.5
+13		0	0
+14		1	0.5
+
+Note that DIFFERENT study population to reproductive success data
+Note that only group sizes 4, 5, 6 and 8 entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+			### CARRION CROW Corvus corone ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Canestrari et al. 2008 ##
+
+location: northern Spain (42° N, 5° W)
+years: March to July, 1995 to 2004
+breeding season / study period: March to July
+
+Figure 1
+number of fledglings produced per year
+
+pairX: 0.53
+pairSD: sqrt(0.80) = 0.89
+pairVar: varianceEffect(0.07, 163) = 0.80
+pairN: 162
+
+trioX: 0.63
+trioSD: sqrt(0.87) = 0.93
+trioVar: varianceEffect(0.06, 242) = 0.87
+trioN: 242
+
+fourX: 0.83
+fourSD: sqrt(1.18) = 1.09
+fourVar: varianceEffect(0.1, 118) = 1.18
+fourN: 118
+
+fiveX: 0.86
+fiveSD: sqrt(1.12) = 1.06
+fiveVar: varianceEffect(0.13, 66) = 1.12
+fiveN: 66
+
+note that groups are represented multiple times here, but group ID was controlled in analyses
+note that territory quality controlled in statistical models
+note that groups have a maximum of one successful attempt per season
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Baglione et al. 2002 ##
+
+Study location: northern Spain (42° N, 5° W)
+Study dates: 1995 -
+
+Fig 1
+Total = 60 + 96 + 45 + 10 + 7 + 2 + 2 = 222
+
+Group size	N	%
+2		60	27
+3		96	43
+4		45	20
+5		10	5
+6		7	3
+7		2	1
+8		0	0	
+9		2	1
+
+Note that same study population as reproductive success data
+Note that only group sizes 2-5 entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+			### AZURE-WINGED MAGPIE Cyanopica cyanus ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Valencia et al. 2003 ##
+
+location: near Badajoz, Spain (39°03' N, 6°48' W)
+years: March to July 1992 to 1997 (6 breeding seasons)
+breeding season / study period: late March to early July
+
+Figure 1
+number of fledglings per hatched nest
+
+pairX: 1.59
+pairSD: sqrt(5.13) = 2.27
+pairVar: varianceEffect(0.3, 57) = 5.13
+pairN: 57
+
+trioX: 2.21
+trioSD: sqrt(5.73) = 2.39
+trioVar: varianceEffect(0.43, 31) = 5.73
+trioN: 31
+
+fourX: 3.92
+fourSD: sqrt(6.02) = 2.45
+fourVar: varianceEffect(0.74, 11) = 6.02
+fourN: 11
+
+fiveX: 4.16
+fiveSD: sqrt(8.33) = 2.89
+fiveVar: varianceEffect(0.87, 11) = 8.33
+fiveN: 11
+
+note that in this species, only hatched nests are considered but this seems to be because helpers can appear once a nest has young in it (second-option helpers), as well as be present from the beginning (first-option)
+"The number of nests where eggs hatched with and without helpers did not differ for the 6-yr of study (X2(5) = 4.86, p = 0.43)"
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Valencia et al. 2003 ##
+
+Study location: near Badajoz, Spain
+Study dates: 1992-1997
+
+Table 1
+Total = 56 + 31 + 12 + 4 + 4 + 2 + 1 = 110
+
+Group size	N	%
+2		56	51
+3		31	28
+4		12	11
+5		4	4
+6		4	4
+7		2	2
+8		0	0
+9		0	0
+10		0	0
+11		1	1
+
+Note that same study population as reproductive success data
+Note that only group sizes 2-5 entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+			### LAUGHING KOOKABURRA Dacelo novaeguineae ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Legge 2000 ##
+
+location: near Canberra, Australia: Mt Majura, Mt Ainslie, O'Connor ridge, Aranda Bushland and Black Mountain, including the Australian National Botanic Gardens (35°16' S, 149°6' E)
+years: December 1994 to February 1998 (X breeding seasons)
+breeding season / study period: September to January (from Legge & Cockburn 2000)
+
+"Kookaburras were normally found sitting in old gum trees"
+
+Figure 2c
+Fledging success (number of nestlings present on the final nest visit at 32 days)
+
+pairX: 1.15
+pairSD: sqrt(1.18) = 1.09
+pairVar: varianceEffect(0.16, 46) = 1.18
+pairN: 46
+
+trioX: = 1.40
+trioSD: sqrt(1.12) = 1.06
+trioVar: varianceEffect(0.2, 28) = 1.12
+trioN: 28
+
+fourX: 1.69
+fourSD: sqrt(1.16) = 1.08
+fourVar: varianceEffect(0.2, 29) = 1.16
+fourN: 29
+
+fiveX: 1.68
+fiveSD: sqrt(1.18) = 1.09
+fiveVar: varianceEffect(0.28, 15) = 1.18
+fiveN: 15
+
+sixX: 1.87
+sixSD: sqrt(2.08) = 1.44
+sixVar: varianceEffect(0.51, 8) = 2.08
+sixN: 8
+
+sevenX: 0.43
+sevenSD: sqrt(0.22) = 0.47
+sevenVar: varianceEffect(0.21, 5) = 0.22
+sevenN: 5
+
+kookaburras are single brooded, therefore nest = year
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Legge & Cockburn 2000 ##
+
+Study location: near Canberra, Australia: Mt Majura, Mt Ainslie, O'Connor ridge, Aranda Bushland and Black Mountain, including the Australian National Botanic Gardens
+Study dates: 1994-1998
+
+Figure 1
+Total = 44 + 29 + 29 + 15 + 8 + 4 + 1 = 130
+
+Group size	N	%
+2		44	34
+3		29	22
+4		29	22
+5		15	12
+6		8	6
+7		4	3
+8		1	1
+
+Note that same study population as reproductive success data
+Note that only group sizes 2-7 entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+		### WHITE-BREASTED ROBIN Eopsaltria georgiana ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Russell et al. 2004 ##
+
+location: Smith's Brook Reserve, Western Australia (34°20' S, 116°42' E)
+years: 1978 to 1987 (X breeding seasons) but analysis of group productivity is restricted to the years 1979–87 (n > 10 groups with data)
+breeding season / study period: July to December
+
+territory + climate + group size + age / experience of breeding female and helpers influenced productivity
+
+Table 6 - number of fledglings per year
+
+Very good territories
+
+pairX: 2.8
+pairSD: sqrt(2.87) = 1.69
+pairVar: varianceEffect(0.47, 13) = 2.87
+pairN: 13
+
+trioX: = 3.7
+trioSD: sqrt(2.82) = 1.68
+trioVar: varianceEffect(0.35, 23) = 2.82
+trioN: 23
+
+fourX: 3.8
+fourSD: sqrt(1.01) = 1.01
+fourVar: varianceEffect(0.21, 23) = 1.01
+fourN: 23
+
+Good territories
+
+pairX: 2.0
+pairSD: sqrt(1.89) = 1.38
+pairVar: varianceEffect(0.30, 21) = 1.89
+pairN: 21
+
+trioX: = 3.0
+trioSD: sqrt(1.50) = 1.23
+trioVar: varianceEffect(0.21, 34) = 1.50
+trioN: 34
+
+fourX: 2.9
+fourSD: sqrt(2.23) = 1.49
+fourVar: varianceEffect(0.26, 33) = 2.23
+fourN: 33
+
+Poor territories
+
+pairX: 2.2
+pairSD: sqrt(1.10) = 1.03
+pairVar: varianceEffect(0.21, 24) = 1.10
+pairN: 24
+
+trioX: = 2.0
+trioSD: sqrt(1.79) = 1.34
+trioVar: varianceEffect(0.24, 31) = 1.79
+trioN: 31
+
+fourX: 2.7
+fourSD: sqrt(0.9) = 0.95
+fourVar: varianceEffect(0.30, 10) = 0.9
+fourN: 10
+
+
+# weighted averages
+
+pairX: ((2.8*13) + (2.0*21) + (2.2*24)) / (13+21+24) = 2.26
+pairSD: ((1.69*13) + (1.38*21) + (1.03*24)) / (13+21+24) = 1.31
+pairVar: ((2.87*13) + (1.89*21) + (1.10*24)) / (13+21+24) = 1.78
+pairN: 13 + 21 + 24 = 58
+
+trioX: ((3.0*34) + (3.7*23) + (2.0*31)) / (34+23+31) = 2.83
+trioSD: ((1.23*34) + (1.68*23) + (1.34*31)) / (34+23+31) = 1.39
+trioVar: ((1.50*34) + (2.82*23) + (1.79*31)) / (34+23+31) = 1.95
+trioN: 34 + 23 + 31 = 88
+
+fourX: ((2.7*10) + (2.9*33) + (3.8*23)) / (10+33+23) = 3.18
+fourSD: ((0.95*10) + (1.49*33) + (1.01*23)) / (10+33+23) = 1.24
+fourVar: ((0.9*10) + (2.23*33) + (1.01*23)) / (10+33+23) = 1.60
+fourN: 10 + 33 + 23 = 66
+
+note that 'four' is more than one helper, so four or higher
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-#
+
+## Russell et al. 2004 ##
+
+Study location: Smith's Brook Reserve, Western Australia
+Study dates: 1978-1992
+
+Table 1
+Total = 76 + 105 + 46 + 26 + 5 = 258
+
+Group size	N	%
+2		76	30
+3		105	41
+4		46	18
+5		26	10
+6		5	2
+
+Note that same study population as reproductive success data
+Note that only group sizes 2-4 entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+		### KAROO SCRUB-ROBIN Erythropygia coryphaeus ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Lloyd et al. 2009 ##
+
+location: Koeberg Nature Reserve, South Africa (33°41' S, 18°26' E)
+years: August to November 2000-2007 (X breeding seasons)
+breeding season / study period: August to November
+
+## Lloyd pers. comm. (email received on 11.4.22) ##
+Fecundity is the number of fledged young through the breeding season
+see 'KARO annual fecundity for Philip Downing.xlsx' file in bet-hedging/data/rawData/E_coryphaeus
+Note - this treats any changes in breeder ID within territories as unique observations
+
+Years pooled:
+
+pairs <-  c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,4,0,0,2,0,0,0,0,0,1,0,0,3,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0,0,0,0,3,0,0,0,3,0,0,0,3,0,0,0,0,0,0,2,0,0,2,0,0,2,0,0,0,0,0,0,0,3,1,2,0,0,1,0,0,0,3,2,0,0,1,0,0,2,0,0,2,0,0,0,0,2,0,0,3,0,0,0,0,0,2,0,0,2,3,0,0,0,0,3,0,0,0,2,3,2,0,0,0,1,0,0,0,1,0,0,2,2,0,0,0,2,3,3,0,0,0,0,0,0,0,0,1,2,2,1,1,2,0,0,3,2,0,0,2,0,0,0,0,0,0,1,0,0,0,2,3,0,3,1,3,1,0,0,2,0,3,2,5,3,1,0,0,0,2,0,0,1,3,1,3,3,0,3,0,3,0,0,1,3,0,4,0,2,0,2,2,1)
+
+trios <- c(0,0,0,0,0,3,3,3,3,3,0,3,0,0,0,0,0,5,1,1,2,0,3,2,3,3,2,0,3,3,2,3,3,0,2,3,0,0,0,3,0,2,4,0,0,2,2,0,3)
+
+fours <- c(4,4,0,2,0,3,3,0)
+
+pairX: mean(pairs) = 0.71
+pairSD: sd(pairs) = 1.12
+pairVar: var(pairs) = 1.26
+pairN: length(pairs) = 298
+
+trioX: mean(trios) = 1.53
+trioSD: sd(trios) = 1.47
+trioVar: var(trios) = 2.17
+trioN: length(trios) = 49
+
+fourX: mean(fours) = 2.00
+fourSD: sd(fours) = 1.77
+fourVar: var(fours) = 3.14
+fourN: length(fours) = 8
+
+Note this excluded one group which changed size during the breeding season
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-#
+ 
+## Lloyd et al. 2009 ##
+
+location: Koeberg Nature Reserve, South Africa (33°41' S, 18°26' E)
+years: August to November 2000-2007 (X breeding seasons)
+breeding season / study period: August to November
+
+Results text: 
+"only 15 +/- 2% (range = 2-20%, n  = 5 years) of the groups breeding cooperatively"
+"The number of helpers per cooperative group ranged between one and three, with the following frequencies: 84% with one helper, 14% with two helpers, and 2% with three helpers (n = 64 groups)"
+If 64 = 15%, then 427 groups studied in total
+Total = 363 + 54 + 9 + 1 = 427
+
+Group size	N	%
+2		363	85
+3		54	13
+4		9	2
+5		1	1
+
+Note that same study population as reproductive success data
+Note that only group sizes 2-4 entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+			### SUPERB FAIRYWREN Malurus cyaneus ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Brouwer et al. 2020 ##
+
+location: Australian National Botanic Gardens, Canberra, Australia (35°16' S, 149°6' E)
+years: 1993 to 2014 (X breeding seasons)
+breeding season / study period: September to March
+
+Figure 3c - group productivity = number of fledglings produced per group per breeding season
+
+pairX: 2.5
+pairSD: sqrt(33.6) = 5.8
+pairVar: varianceEffect(0.2, 841) = 33.6
+pairN: 841
+
+trioX: 3.0
+trioSD: sqrt(30.5) = 5.5
+trioVar: varianceEffect(0.3, 339) = 30.5
+trioN: 339
+
+fourX: 3.2
+fourSD: sqrt(13.6) = 3.7
+fourVar: varianceEffect(0.3, 151) = 13.6
+fourN: 151
+
+fiveX: 2.4
+fiveSD: sqrt(5.6) = 2.4
+fiveVar: varianceEffect(0.4, 35) = 5.6
+fiveN: 35
+
+sixX: 3.8
+sixSD: sqrt(5.4) = 2.3
+sixVar: varianceEffect(0.7, 11) = 5.4
+sixN: 11
+
+note that 'six' includes all groups >5
+
+Note that data also available from earlier studies on this species
+Used this one as it is the latest and study dates overlap
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Brouwer et al. 2020 ##
+
+Study location: Australian National Botanic Gardens, Canberra, Australia 
+Study dates: 1993 to 2014
+
+Figure 3a
+Total = 841 + 339 + 151 + 35 + 11 = 1377
+
+Group size	N	%
+2		841	61
+3		339	25
+4		151	11
+5		35	3
+6+		11	1
+
+Note that same study population as reproductive success data
+Note all group sizes entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+			### RED-WINGED FAIRYWREN Malurus elegans ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Russell & Rowley 2000 ##
+
+location: Smith's Brook Reserve, Western Australia (34°20' S, 116°42' E)
+years: 1980-1981 to 1995-1996 (X breeding seasons) but only data from 1981-1986 presented (?)
+breeding season / study period: October to January
+
+Table 11
+fledglings / per year (novice female)
+
+pairX: 1.31
+pairSD: sqrt(1.25) = 1.12
+pairVar: varianceEffect(0.31, 13) = 1.25
+pairN: 13
+
+trioX: 2.31
+trioSD: sqrt(1.25) = 1.12
+trioVar: varianceEffect(0.31, 13) = 1.25
+trioN: 13
+
+fourX: 2.73
+fourSD: sqrt(3.21) = 1.79
+fourVar: varianceEffect(0.54, 11) = 3.21
+fourN: 11
+
+Table 11
+fledglings / per year (experienced female)
+
+pairX: 2.32
+pairSD: sqrt(2.46) = 1.57
+pairVar: varianceEffect(0.36, 19) = 2.46
+pairN: 19
+
+trioX: 2.22
+trioSD: sqrt(1.48) = 1.22
+trioVar: varianceEffect(0.20, 37) = 1.48
+trioN: 37
+
+fourX: 2.68
+fourSD: sqrt(2.31) = 1.52
+fourVar: varianceEffect(0.19, 64) = 2.31
+fourN: 64
+
+note that number of independent young and yearlings also reported.
+note that reproductive success per nest is also reported in Table 11
+
+
+## Brouwer et al. 2020 ##
+
+location: Smith's Brook Reserve, Western Australia (34°20' S, 116°42' E)
+years: 2008 to 2016 (X breeding seasons)
+breeding season / study period: October to January
+
+Figure 3d - group productivity = number of fledglings produced per group per breeding season
+
+pairX: 1.05
+pairSD: sqrt(8.5) = 2.9
+pairVar: varianceEffect(0.25, 136) = 8.5
+pairN: 136
+
+trioX: 1.08
+trioSD: sqrt(9.6) = 3.1
+trioVar: varianceEffect(0.24, 167) = 9.6
+trioN: 167
+
+fourX: 1.05
+fourSD: sqrt(8.0) = 2.8
+fourVar: varianceEffect(0.23, 151) = 8.0
+fourN: 151
+
+fiveX: 0.83
+fiveSD: sqrt(2.0) = 1.4
+fiveVar: varianceEffect(0.17, 70) = 2.0
+fiveN: 70
+
+sixX: 0.92
+sixSD: sqrt(2.1) = 1.4
+sixVar: varianceEffect(0.23, 39) = 2.1
+sixN: 39
+
+note that 'six' includes all groups >5
+
+
+# weighted averages
+
+pairX: ((1.31*13) + (2.32*19) + (1.05*136)) / (13+19+136) = 1.21
+pairSD: ((1.12*13) + (1.57*19) + (2.9*136)) / (13+19+136) = 2.61
+pairVar: ((1.25*13) + (2.46*19) + (8.5*136)) / (13+19+136) = 7.26
+pairN: 13 + 19 + 136 = 168
+
+trioX: ((2.31*13) + (2.22*37) + (1.08*167)) / (13+37+167) = 1.35
+trioSD: ((1.12*13) + (1.22*37) + (3.1*167)) / (13+37+167) = 2.66
+trioVar: ((1.25*13) + (1.48*37) + (9.6*167)) / (13+37+167) = 7.72
+trioN: 13 + 37 + 167 = 217
+
+fourX: ((2.73*11) + (2.68*64) + (1.05*151)) / (11+64+151) = 1.59
+fourSD: ((1.79*11) + (1.52*64) + (2.8*151)) / (11+64+151) = 2.39
+fourVar: ((3.21*11) + (2.31*64) + (8.0*151)) / (11+64+151) = 6.16
+fourN: 11 + 64 + 151 = 226
+
+fiveX: 0.83
+fiveSD: sqrt(2.0) = 1.4
+fiveVar: varianceEffect(0.17, 70) = 2.0
+fiveN: 70
+
+sixX: 0.92
+sixSD: sqrt(2.1) = 1.4
+sixVar: varianceEffect(0.23, 39) = 2.1
+sixN: 39
+
+note weighted average taken since study dates don't overlap
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Russell & Rowley 2000 ##
+
+Study location: Smith's Brook Reserve, Western Australia
+Study dates: 1980-1994
+
+Table 1
+Total = 67 + 93 + 89 + 84 + 33 + 24 + 5 + 3 = 398
+
+Group size	N	%
+2		67	17
+3		93	23
+4		89	22
+5		84	21
+6		33	8
+7		24	6
+8		5	1
+9		3	1
+
+Note that same study population as reproductive success data
+
+
+## Brouwer et al. 2020 ##
+
+Study location: Smith's Brook Reserve, Western Australia 
+Study dates: 2008 to 2016
+
+Figure 3b
+Total = 136 + 167 + 151 + 70 + 39 = 563
+
+Group size	N	%
+2		136	24
+3		167	30
+4		151	27
+5		70	12
+6+		39	7
+
+Note that same study population as reproductive success data
+
+
+## Combined Group Sizes ##
+
+Total = 203 + 260 + 240 + 154 + 72 + 24 + 5 + 3 = 398 + 563 = 961
+
+Group size	N1	N2	Ntotal		% 
+2		67	136	203		21
+3		93	167	260		27
+4		89	151	240		25
+5		84	70	154		16
+6		33	39	72		7
+7		24	0	24		3
+8		5	0	5		1
+9		3	0	3		1
+
+Note that only group sizes 2-6 entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+		### WHITE-FRONTED BEE-EATER Merops bullockoides ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Emlen & Wrege 1991 ##
+
+location: Lake Nakuru National Park, Kenya (0°39' S, 36°09' E)
+years: October-December, 1980-1984 (5 breeding seasons, see also Emlen 1990)
+breeding season / study period: October to December (short rains)
+
+Figure 1
+number of fledged young (per nesting attempt)
+
+pairX: 0.45
+pairSD: sqrt(0.60) = 0.78
+pairVar: varianceEffect(0.08, 94) = 0.60
+pairN: 94
+
+trioX: 1.11
+trioSD: sqrt(0.48) = 0.69
+trioVar: varianceEffect(0.09, 59) = 0.48
+trioN: 59
+
+fourX: 1.40
+fourSD: sqrt(0.47) = 0.69
+fourVar: varianceEffect(0.14, 24) = 0.47
+fourN: 24
+
+fiveX: 1.87
+fiveSD: sqrt(0.48) = 0.69
+fiveVar: varianceEffect(0.23, 9) = 0.48
+fiveN: 9
+
+note that these are model predictions; the model controlled for bq and tq
+note that Figure 1 is based on productivity per nesting attempt
+note that "a trend of increased probability of participation [in secondary nesting attempts] with increased group size was apparent"
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Emlen 1990 ##
+
+Study location: Lake Nakuru National Park, Kenya
+Study dates: 1977-1984
+
+Figure 16.6
+Total = 308 + 186 + 83 + 27 + 6 + 1 = 611
+
+Group size	N	%
+2		308	50
+3		186	30
+4		83	14
+5		27	4
+6		6	1
+7		1	1
+
+Note that same study population as reproductive success data
+Note that only group sizes 2-5 entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+				### HOATZIN Opisthocomus hoazin ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Strahl & Schmitz 1990 ##
+
+# Chapter 5 “Hoatzins: cooperative breeding in a folivorous neotropical bird”
+
+location: Fundo Pecuario Masaguaral, Venezuela (8°34' N, 67°35' W)
+years: 1981 to 1987
+breeding season / study period: May to November (Figure 6. in Strahl 1988)
+
+Ns from Figure 5.6 (total = 590 unit years)
+pairs = 0.44 * 590 = 260
+trios = 0.29 * 590 = 171
+fours = 0.12 * 590 = 71
+fives = 0.10 * 590 = 59
+six or > = 0.05 * 590 = 29
+
+Figure 5.7
+mean number of young raised to independence (annual number of fledglings it seems)
+
+pairX: 0.32
+pairSD: sqrt(0.65) = 0.81
+pairVar: varianceEffect((0.1/2), 260) = 0.65
+pairN: 260
+
+trioX: 0.69
+trioSD: sqrt(0.96) = 0.98
+trioVar: varianceEffect((0.15/2), 171) = 0.96
+trioN: 171
+
+fourX: 0.90
+fourSD: sqrt(1.60) = 1.26
+fourVar: varianceEffect((0.30/2), 71) = 1.60
+fourN: 71
+
+fiveX: 1.13
+fiveSD: sqrt(1.16) =  1.07
+fiveVar: varianceEffect((0.28/2), 59) = 1.16
+fiveN: 59
+
+sixX: 1.19
+sixSD: sqrt(0.99) = 1.0
+sixVar: varianceEffect((0.37/2), 29) = 0.99
+sixN: 29
+
+note that error bars are two se
+note that 'six' includes all groups >5
+note that only 9 units had > one pair of breeding adults and these are excluded from Figure 5.7, but maybe Figure 5.6 includes them?
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Strahl 1988 ##
+
+Study location: Fundo Pecuario Masaguaral, Venezuela
+Study dates: 1982-1985
+
+Figure 2
+Total = 149 + 106 + 51 + 40 + 15 + 3 = 364
+
+Group size	N	%
+2		149	41
+3		106	29
+4		51	14
+5		40	11
+6		15	4
+7+		3	1
+
+Note that same study population as reproductive success data
+Note that only group sizes 2-6 entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+			### SOCIABLE WEAVER Philetairus socius ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Covas et al. 2008 ##
+
+location: Benfontein Game Farm, Norther Cape Province, South Africa (28°53' S, 24°89' E) note that longitude not correct
+years: September 1999 to January 2001 (2 breeding seasons)
+breeding season / study period: September to April (when breeding usually takes place)
+
+Figure 4a (pooled)
+total number of young fledged per pair per season
+Covas_pairs <- c(0, 1, 2, 3, 4, 5, 6, 0, 1, 2)
+Covas_trios <- c(0, 2, 3, 4, 5, 0, 1, 2)
+Covas_fours <- c(5, 6, 0, 1, 2, 3, 4)
+
+pairX: 2.4
+pairSD: 2.07
+pairVar: 4.27
+pairN: 10
+
+trioX: 2.13
+trioSD: 1.81
+trioVar: 3.27
+trioN: 8
+
+fourX: 3
+fourSD: 2.16
+fourVar: 4.67
+fourN: 7
+
+
+note that the sample sizes reported in the results do not correspond to those presented in Figure 4a.
+note that pairs and groups make up to 8 breeding attempts / season
+
+
+## D'Amelio et al. 2022 ##
+
+location: Benfontein Game Farm, Norther Cape Province, South Africa (28°52' S, 24°50' E) note that longitude not correct
+years: September 2011 to April 2012 and 2013 to 2018 (group size data, 6 breeding seasons)
+breeding season / study period: September to April (when 91% of breeding takes place)
+
+Values calculated from supplementary raw data provided in:
+'Nesting_Climate_Clutch_GroupSize.csv'
+Only considered 'natural colonies' (i.e. excluded 'protected colonies') for consistency with other studies which did not exclude predators
+
+Reproductive success measure:
+
+Years pooled:
+Note - can include data from years when N = 1 / group size here
+
+DAmelio_pairs <- c(1,1,0,0,0,0,3,1,1,0,1,0,0,0,3,0,0,1,0,1,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,1,0,2,0,3,3,2,2,4,2,0,3,0,3,0,0,0,0,0,0,0,0,0,0,0,2,3,1,3,3,2,0,3,0,0,3,0,0,2,1,2,0,3,0,1,3,0,2,0,0,2,2,4,0,2,3,0,1,1,2,1,0,2,1,1,3,1,0,3,0,2,1,0,0,2,2,1,2,0,1,0,0,0)
+ 
+DAmelio_trios <- c(0,1,3,3,0,2,3,3,0,3,3,2,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,0,3,4,2,2,2,2,2,0,4,0,3,0,0,1,2,3,0,2,2,2,0,1,4,0,4,0,1,0,0,0,2,2,2,0,0,0,2,2,1,1,0,2,0,0,0,0,0,0,0,0,3,0,4,0,3,1,0,2,3,2,3,1,0,3,0,3,2,0,3,2,3,1,2,0,0,0,0,3,0,2,0,0,1,2,3,2)
+
+DAmelio_fours <- c(2,0,0,0,0,0,3,0,0,1,0,1,0,0,0,1,1,0,0,3,2,1,3,3,2,3,0,3,3,0,0,0,0,3,1,0,2,2,2,3,0,0,2,2,3,1,0,3,0,2,4,2,3,0,2,1,2,3,1,2,3,1,0,0,2,2,3,0,4,1,2,3,2,0,2,2,0,0,0,2,2,1,3,2,0,3,2,2,1,3,4,3,0,3,0,0,0,3,1,3,3)
+
+DAmelio__fives <- c(2,0,1,2,1,1,0,0,3,1,2,0,4,0,3,3,2,0,0,0,3,3,2,0,0,3,0,0,0,3,2,2,3,0,3,3,2,2,0,1,0,2,1,2,0,1,3,3,3,2,0,0,3,0,0,2,2)
+
+DAmelio_sixes <- c(0,0,0,2,1,0,0,2,2,3,3,0,0,0,0,3,3,2,0,3,0)
+
+DAmelio_sevens <- c(2,2,4,2)
+
+pairX: mean(DAmelio_pairs) = 0.91
+pairSD: sd(DAmelio_pairs) = 1.56
+pairVar: var(DAmelio_pairs) = 1.34
+pairN: length(DAmelio_pairs) = 132
+
+trioX: mean(DAmelio_trios) = 1.18
+trioSD: sd(DAmelio_trios) = 1.29
+trioVar: var(DAmelio_trios) = 1.68
+trioN: length(DAmelio_trios) = 120
+
+fourX: mean(DAmelio_fours) = 1.45
+fourSD: sd(DAmelio_fours) = 1.28
+fourVar: var(DAmelio_fours) = 1.63
+fourN: length(DAmelio_fours) = 101
+
+fiveX: mean(DAmelio_fives) = 1.42
+fiveSD: sd(DAmelio_fives) = 1.27
+fiveVar: var(DAmelio_fives) = 1.61
+fiveN: length(DAmelio_fives) = 57
+
+sixX: mean(DAmelio_sixes) = 1.14
+sixSD: sd(DAmelio_sixes) = 1.31
+sixVar: var(DAmelio_sixes) = 1.73
+sixN: length(DAmelio_sixes) = 21
+
+sevenX: mean(DAmelio_sevens) = 2.5
+sevenSD: sd(DAmelio_sevens) = 1.0
+sevenVar: var(DAmelio_sevens) = 1.0
+sevenN: length(DAmelio_sevens) = 4
+
+
+# combined values (since study dates don't overlap)
+
+pairX: mean(c(Covas_pairs, DAmelio_pairs)) = 0.91
+pairSD: sd(c(Covas_pairs, DAmelio_pairs)) = 1.56
+pairVar: var(c(Covas_pairs, DAmelio_pairs)) = 1.34
+pairN: length(c(Covas_pairs, DAmelio_pairs)) = 132
+
+trioX: mean(c(Covas_trios, DAmelio_trios)) = 1.18
+trioSD: sd(c(Covas_trios, DAmelio_trios)) = 1.29
+trioVar: var(c(Covas_trios, DAmelio_trios)) = 1.68
+trioN: length(c(Covas_trios, DAmelio_trios)) = 120
+
+fourX: mean(c(Covas_fours, DAmelio_fours)) = 1.45
+fourSD: sd(c(Covas_fours, DAmelio_fours)) = 1.28
+fourVar: var(c(Covas_fours, DAmelio_fours)) = 1.63
+fourN: length(c(Covas_fours, DAmelio_fours)) = 101
+
+fiveX: mean(DAmelio_fives) = 1.42
+fiveSD: sd(DAmelio_fives) = 1.27
+fiveVar: var(DAmelio_fives) = 1.61
+fiveN: length(DAmelio_fives) = 57
+
+sixX: mean(DAmelio_sixes) = 1.14
+sixSD: sd(DAmelio_sixes) = 1.31
+sixVar: var(DAmelio_sixes) = 1.73
+sixN: length(DAmelio_sixes) = 21
+
+sevenX: mean(DAmelio_sevens) = 2.5
+sevenSD: sd(DAmelio_sevens) = 1.0
+sevenVar: var(DAmelio_sevens) = 1.0
+sevenN: length(DAmelio_sevens) = 4
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## D'Amelio et al. 2022 ##
+
+Study location: Benfontein Game Farm, Norther Cape Province, South Africa
+Study dates: 2011 to 2018
+
+Figure S1 (summed across the three outcomes for natural colonies only)
+Totals = 103 + 97 + 89 + 51 + 18 + 4 + 1 = 363
+
+
+Group size	N	%
+2		103	28
+3		97	27
+4		89	25
+5		51	14
+6		18	5
+7		4	1
+8		1	1
+
+Note that same study population as reproductive success data
+Note that only group sizes 2-7 entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+			### GREEN WOODHOOPOE Phoeniculus purpureus ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Ligon & Ligon 1978 ##
+
+Accessed via https://www.biodiversitylibrary.org/item/278210#page/12/mode/1up
+
+location: Lake Naivasha, Kenya (0°40' S, 36°23' E)
+years: 1975 to 1977 (3 breeding seasons)
+breeding season / study period: June to January
+
+Figure 14, 15, 16 (pooled)
+
+pair <- c(0,0,3)
+trio <- c(0,0,2,0,0,2,4,2,5)
+four <- c(0,0,0,2,2,3,3,4)
+five <- c(2,1,0,0,0,0,2,2,0,1,1,2,3,3,6)
+six <- c(3,3,3,2,0,1,1,2,2,3,0,1,2)
+seven <- c(4,0,2,6)
+eight <- c(0,2,3,4,2,2,3)
+nine <- c(7,1,1)
+
+pairX: 1.00
+pairSD: 1.73
+pairVar: 3.00
+pairN: 3
+
+trioX: 1.67
+trioSD: 1.87
+trioVar: 3.50
+trioN: 9
+
+fourX: 1.75
+fourSD: 1.58
+fourVar: 2.5
+fourN: 8
+
+fiveX: 1.53
+fiveSD: 1.64
+fiveVar: 2.70
+fiveN: 15
+
+sixX = 1.77
+sixSD = 1.09
+sixVar = 1.19
+sixN = 13
+
+sevenX = 3.00
+sevenSD = 2.58
+sevenVar = 6.67
+sevenN = 4
+
+eightX = 2.29
+eightSD = 1.25
+eightVar = 1.57
+eightN = 7
+
+nineX = 3.00
+nineSD = 3.46
+nineVar = 12
+nineN = 3
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Ligon & Ligon 1978 ##
+
+Accessed via https://www.biodiversitylibrary.org/item/278210#page/12/mode/1up
+
+location: Lake Naivasha, Kenya (0°40' S, 36°23' E)
+years: 1975 to 1977 (3 breeding seasons)
+breeding season / study period: June to January
+
+Fig 3
+Group size	N	%
+2		6	5
+3		21	16
+4		16	12
+5		27	21
+6		22	17
+7		11	9
+8		14	11
+9		8	6
+10		1	0.5
+11		2	1.5
+15		1	0.5
+17		1	0.5
+
+Note that same study population as reproductive success data
+Note that only group sizes 2-9 entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+		### PLACID GREENBUL Phyllastrephus placidus ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Cousseau pers. comm. (email received on 4.5.22) ##
+
+location: Dabida massif of the Taita Hills, Kenya (30°25' S, 38°20' E)
+years: November 2012 to March 2020 (7 breeding seasons, 2017/2018 missing)
+breeding season / study period: November to March
+
+Details above fro Cousseau et al. 2020
+
+see 'PG_data_Downing' .xlsx file in bet-hedging/data/rawData/P_placidus
+note that no data for the 2017/2018 breeding season
+
+## years pooled ##
+
+pairX: 1.16
+pairSD: 0.99
+pairVar: 1
+pairN: 84
+
+trioX: 1.19
+trioSD: 1.03
+trioVar: 1.1
+trioN: 108
+
+fourX: 1.53
+fourSD: 0.84
+fourVar: 0.76
+fourN: 57
+
+fiveX: 1.4
+fiveSD: NA
+fiveVar: NA
+fiveN: 15
+
+sixX: 1.75
+sixSD: NA
+sixVar: NA
+sixN: 8
+
+sevenX: 1.5
+sevenSD: 0.71
+sevenVar: 0.5
+sevenN: 2
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Van de Loock 2019 ##
+
+Study location: Taita Hills, Kenya
+Study dates: 2007-2016
+
+Figure 3.1
+Total = 21 + 22 + 13 + 4 + 2 + 1 = 63
+
+Group size	N	%
+2		21	33
+3		22	35
+4		13	21
+5		4	6
+6		2	3
+7		1	2
+
+Note that same study population as reproductive success data
+Note that all group sizes entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+		### RED-COCKADED WOODPECKER Picoides borealis ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Walters & Garcia 2016 ##
+
+# Chapter 4 “Red-cockaded Woodpeckers”
+
+location: x2 study locations, centroid chosen (31°18' N, 93°55' W)
+years: 1986 to present
+breeding season / study period: April to July (from Walters et al. 1992)
+
+Figure 4.4
+Fledgling per group per year
+
+MCBCL
+
+pairX: 1.18
+pairSD: sqrt(1.09) = 1.04
+pairVar: varianceEffect((1.22-1.18), 680) = 1.09
+pairN: 680
+
+trioX: 1.71
+trioSD: sqrt(1.36) = 1.17
+trioVar: varianceEffect((1.76-1.71), 544) = 1.36
+trioN: 544
+
+fourX: 1.99
+fourSD: sqrt(1.33) = 1.15
+fourVar: varianceEffect((2.06-1.99), 271) = 1.33
+fourN: 271
+
+fiveX: 1.89
+fiveSD: sqrt(1.58) = 1.26
+fiveVar: varianceEffect((2.04-1.89), 70) = 1.58
+fiveN: 70
+
+note that 'five' includes all groups between 5 and 7
+
+
+Sandhills
+
+pairX: 1.23
+pairSD: sqrt(1.67) = 1.29
+pairVar: varianceEffect((1.25-1.23), 4166) = 1.67
+pairN: 4166
+
+trioX: 1.86
+trioSD: sqrt(2.19) = 1.48
+trioVar: varianceEffect((1.89-1.86), 2438) = 2.19
+trioN: 2438
+
+fourX: 2.29
+fourSD: sqrt(1.84) = 1.36
+fourVar: varianceEffect((2.34-2.29), 737) = 1.84
+fourN: 737
+
+fiveX: 2.16
+fiveSD: sqrt(1.52) = 1.23
+fiveVar: varianceEffect((2.26-2.16), 152) = 1.52
+fiveN: 152
+
+sixX: 2.14
+sixSD: sqrt(1.74) = 1.32
+sixVar: varianceEffect((2.36-2.14), 36) = 1.74
+sixN: 36
+
+note that 'six' includes all groups between 6 and 7
+note that data also available from other studies on this species but used this one as it is the latest and other studies measure RS on a /nest, not /year basis
+
+
+# weighted averages
+
+pairX: ((1.18*680) + (1.23*4166)) / (680+4166) = 1.22
+pairSD: ((1.04*680) + (1.29*4166)) / (680+4166) = 1.26
+pairVar: ((1.09*680) + (1.67*4166)) / (680+4166) = 1.59
+pairN: 680 + 4166 = 4846
+
+trioX: ((1.71*544) + (1.86*2438)) / (544+2438) = 1.83
+trioSD: ((1.17*544) + (1.48*2438)) / (544+2438) = 1.42
+trioVar: ((1.36*544) + (2.19*2438)) / (544+2438) = 2.04
+trioN: 544 + 2438 = 2982
+
+fourX: ((1.99*271) + (2.29*737)) / (271+737) = 2.21
+fourSD: ((1.15*271) + (1.36*737)) / (271+737) = 1.30
+fourVar: ((1.33*271) + (1.84*737)) / (271+737) = 1.70
+fourN: 271 + 737 = 1008
+
+fiveX: ((1.89*70) + (2.16*152) + (2.14*36)) / (70+152+36) = 2.08
+fiveSD: ((1.26*70) + (1.23*152) + (1.32*36)) / (70+152+36) = 1.25
+fiveVar: ((1.58*70) + (1.52*152) + (1.74*36)) / (70+152+36) = 1.57
+fiveN: 70 + 152 + 36 = 258
+
+note that 'five' includes all groups between 5 and 7
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Walters & Garcia 2016 ##
+
+Study location: Sandhills & MCBL
+Study dates: 1980-2013
+
+Table 4.2 (worked out N in each column / row then summed values)
+Total = 4842 + 2991 + 1006 + 253 = 9092
+
+Group size	N	%
+2		4842	53
+3		2991	33
+4		1006	11
+5-7		253	3
+
+Note that same study population as reproductive success data
+Note that all group sizes entered		
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+		### WHITE-BROWED SPARROW WEAVER Plocepasser mahali ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Lewis 1981 ##
+
+location: Luangwa Valley, Zambia (13°S, 32°E) (coordinates ~ from Winfield & Dale 1993)
+years: August 1976 to August 1979 (3 breeding seasons)
+breeding season / study period: September to April
+
+Table 2 (across years by group size)
+number of fledglings
+two <- c(0, 3, 0, 2, 0, 0, 2, 1, 2, 1, 0, 0)
+three <- c(0, 2, 1, 0, 0, 1, 1, 2, 2, 0, 4, 2, 0, 1)
+four <- c(1, 2, 0, 1, 2, 1, 1, 0, 1, 1, 0, 1)
+five <- c(1, 2, 2, 2, 5, 3, 4, 2, 3, 0, 4, 0, 3, 2, 1)
+six <- c(3, 4, 0, 2, 4, 1, 0, 2, 0, 2, 4)
+seven <- c(1, 0, 4, 4, 4, 3, 3)
+eight <- c(0, 0)
+nine <- c(5)
+ten <- c(2)
+
+pairX: 0.92
+pairSD: 1.08
+pairVar: 1.17
+pairN: 12
+
+trioX: 1.14
+trioSD: 1.17
+trioVar: 1.36
+trioN: 14
+
+fourX: 0.92
+fourSD: 0.67
+fourVar: 0.45
+fourN: 12
+
+fiveX: 2.27
+fiveSD: 1.44
+fiveVar: 2.07
+fiveN: 15
+
+sixX: 2
+sixSD: 1.61
+sixVar: 2.6
+sixN: 11
+
+sevenX: 2.71
+sevenSD: 1.60
+sevenVar: 2.57
+sevenN: 7
+
+eightX: 0
+eightSD: 0
+eightVar: 0
+eightN: 2
+
+note that can also calculate number of young reaching 6 months
+group sizes sampled in January
+
+
+## Capilla-Lasheras et al. 2021 ##
+
+location: Tswalu Kalahari Reserve, Northern Cape Province, South Africa (27°16' S, 22°25' E)
+years: September 2007 to May 2016 (9 breeding seasons)
+breeding season / study period: September to May
+
+Values calculated from raw data provided in Supplementary file '3 - Bivariate models - RAW DATA.csv'
+To account for dependencies (repeated measures on the same breeding female within a breeding season), I calculated the total number of young fledged across breeding attempts and the mean number helpers, which I rounded to the nearest whole number
+See 'bivariateData_3.xlsx' in rawData/P_mahali/
+
+## by year ##
+# 2007
+pair07 <- c(0,1,2,0,2,1,2,2,3,0,2,1,1,1,2,2,1,3,1)
+three07 <- c(3,1,2,2,4)
+four07 <- c(2) 
+
+# 2008
+pair08 <- c(1,1,0)
+three08 <- c(3,2,3,3,2,1,1)
+four08 <- c(2,1,2,4,0,1) 
+five08 <- c(3,1,2,1)
+six08 <- c(2,3,1)
+seven08 <- c(1)
+
+# 2009
+pair09 <- c(1,1,4)
+three09 <- c(2)
+four09 <- c(0,2,1,1,4)
+five09 <- c(1,1,3,3,2)
+six09 <- c(2,2,2,6)
+seven09 <- c(2,3,2,2,1)
+eight09 <- c(2,2,6)
+nine09 <- c(5)
+
+# 2010
+pair10 <- c(0)
+three10 <- c(1,1,0,2,1,1)
+four10 <- c(0,0,2,3)
+five10 <- c(3,2,0,1,1,0,0,2)
+six10 <- c(1,0,1,3,1)
+seven10 <- c(2)
+eight10 <- c(2,2,0,2)
+
+# 2011
+pair11 <- c(1)
+three11 <- c(1,0,1)
+four11 <- c(1,1,0,0)
+five11 <- c(1)
+six11 <- c(0,0,2,0,2)
+seven11 <- c(0)
+Nine11 <- c(0,1)
+
+# 2012
+pair12 <- c(0,0)
+three12 <- c(2,1,2,1,0,0,0,2,1)
+four12 <- c(0,0,0,1,0,1,0,0)
+five12 <- c(2,0)
+six12 <- c(0,2)
+
+# 2013
+pair13 <- c(2,2,3,2,3,4,2,3,1,1,4,2,2,3,2,4,3)
+three13 <- c(1,2,2,1,4,2,4,0,4,2,5,3)
+four13 <- c(3,4,1,2,4)
+five13 <- c(2)
+
+# 2014
+three14 <- c(1,1,2,0,1,1,1)
+four14 <- c(1,1,2,2)
+five14 <- c(1,2,1,0,0,2)
+six14 <- c(1,3,1,2,1,1,1,1)
+seven14 <- c(2,2,1,2)
+eight14 <- c(0)
+
+# 2015
+pair15 <- c(0)
+three15 <- c(0,0)
+four15 <- c(0,1,1,0,0,0)
+five15 <- c(0,0,0,1,0)
+six15 <- c(1,0,0,0,1)
+seven15 <- c(0,0,0,0,0,1)
+nine15 <- c(1)
+
+## years pooled ##
+
+pair <- c(pair07, pair08, pair09,  pair10, pair11, pair12, pair13, pair15)
+three <- c(three07, three08, three09, three10, three11, three12, three13, three14, three15)
+four <- c(four07, four08, four09, four10, four11, four12, four13, four14, four15)
+five <- c(five08, five09, five10, five11, five12, five13, five14, five15)
+six <- c(six08, six09, six10, six11, six12, six14, six15)
+seven <- c(seven08, seven09, seven10, seven11, seven14, seven15)
+eight <- c(eight09, eight10, eight14)
+nine <- c(nine09, Nine11, nine15)
+
+pairX: mean(pair) = 1.68
+pairSD: sd(pair) = 1.18
+pairVar: var(pair) = 1.40
+pairN: length(pair) = 47
+
+trioX: mean(three) = 1.60
+trioSD: sd(three) = 1.23
+trioVar: var(three) = 1.50
+trioN: length(three) = 52
+
+fourX: mean(four) = 1.19
+fourSD: sd(four) = 1.26
+fourVar: var(four) = 1.58
+fourN: length(four) = 43
+
+fiveX: mean(five) = 1.19
+fiveSD: sd(five) = 1.03
+fiveVar: var(five) = 1.06
+fiveN: length(five) = 32
+
+sixX: mean(six) = 1.34
+sixSD: sd(six) = 1.26
+sixVar: var(six) = 1.59
+sixN: length(six) = 32
+
+sevenX: mean(seven) = 1.17
+sevenSD: sd(seven) = 0.99
+sevenVar: var(seven) = 0.97
+sevenN: length(seven) = 18
+
+eightX: mean(eight) = 2.00
+eightSD: sd(eight) = 1.85
+eightVar: var(eight) = 3.43
+eightN: length(eight) = 8
+
+nineX: mean(nine) = 1.75
+nineSD: sd(nine) = 2.22
+nineVar: var(nine) = 4.92
+nineN: length(nine) = 4
+
+
+# weighted averages
+
+pairX: ((0.92*12) + (1.68*47)) / (12+47) = 1.53
+pairSD: ((1.08*12) + (1.18*47)) / (12+47) = 1.16
+pairVar: ((1.17*12) + (1.40*47)) / (12+47) = 1.35
+pairN: 12 + 47 = 59
+
+trioX: ((1.14*14) + (1.6*52)) / (14+52) = 1.50
+trioSD: ((1.17*14) + (1.23*52)) / (14+52) = 1.22
+trioVar: ((1.36*14) + (1.50*52)) / (14+52) = 1.47
+trioN: 14 + 52 = 66
+
+fourX: ((0.92*12) + (1.19*43)) / (12+43) = 1.13
+fourSD: ((0.67*12) + (1.26*43)) / (12+43) = 1.13
+fourVar: ((0.45*12) + (1.58*43)) / (12+43) = 1.33
+fourN: 12 + 43 = 55
+
+fiveX: ((2.27*15) + (1.19*32)) / (15+32) = 1.54
+fiveSD: ((1.44*15) + (1.03*32)) / (15+32) = 1.16
+fiveVar: ((2.07*15) + (1.06*32)) / (15+32) = 1.38
+fiveN: 15 + 32 = 47
+
+sixX: ((2*11) + (1.34*32)) / (11+32) = 1.51
+sixSD: ((1.61*11) + (1.26*32)) / (11+32) = 1.35
+sixVar: ((2.6*11) + (1.59*32)) / (11+32) = 1.85
+sixN: 11 + 32 = 43
+
+sevenX: ((2.71*7) + (1.17*18)) / (7+18) = 1.60
+sevenSD: ((1.60*7) + (0.99*18)) / (7+18) = 1.16
+sevenVar: ((2.57*7) + (0.97*18)) / (7+18) = 1.42
+sevenN: 7 + 18 = 25
+
+eightX: ((0*2) + (2*8)) / (2+8) = 1.60
+eightSD: ((0*2) + (1.85*8)) / (2+8) = 1.48
+eightVar: ((0*2) + (3.43*8)) / (2+8) = 2.74
+eightN: 2 + 8 = 10
+
+nineX: mean(nine) = 1.75
+nineSD: sd(nine) = 2.22
+nineVar: var(nine) = 4.92
+nineN: length(nine) = 4
+
+note weighted averages calculated since different study sites (same RS measures)
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Lewis 1981 ##
+
+Study location: Luangwa Valley, Zambia
+Study dates: 1976 to 1979
+
+Table 2
+Total = 12 + 14 + 12 + 15 + 11 + 7 + 2 = 73
+
+Group size	N	%
+2		12	16
+3		14	19
+4		12	16
+5		15	21
+6		11	15
+7		7	10
+8		2	3
+
+Note that same study population as reproductive success data
+
+
+## Capilla-Lasheras et al. 2021 ##
+
+Study location: Tswalu Kalahari Reserve, Northern Cape Province, South Africa
+Study dates: 2007 to 2016
+
+Supplementary file '3 - Bivariate models - RAW DATA.csv'
+Total = 47 + 52 + 43 + 32 + 32 + 18 + 8 + 4 = 236
+
+Group size	N	%
+2		47	20
+3		52	22
+4		43	18
+5		32	14
+6		32	14
+7		18	8
+8		8	3
+9		4	2
+
+Note that same study population as reproductive success data
+
+
+## Combined Group Sizes ##
+
+Total = 59 + 66 + 55 + 47 + 43 + 25 + 10 + 4 = 73 + 236 = 309
+
+Group size	N1	N2	Ntotal		% 
+2		12	47	59		19
+3		14	52	66		21
+4		12	43	55		18
+5		15	32	47		15
+6		11	32	43		14
+7		7	18	25		8
+8		2	8	10		3
+9		0	4	4		1
+
+Note that group size frequencies here are calculated from the number of groups sampled to determine reproductive success, therefore may not be representative
+Note that all group sizes entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+		### CHESTNUT-CROWNED BABBLER Pomatostomus ruficeps ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Browning et al. 2012 ##
+
+location: Fowlers Gap, New South Wales, Australia (31°05' S, 141°43' E)
+years: July 2006 to December 2008 (3 breeding seasons)
+breeding season / study period: July to December
+
+Productivity = total annual production of fledglings from each breeding female
+Raw data provided in csv file from http://dx.doi.org/10.5061/dryad.ff868
+Data below calculated from said file using 'unit' as the level of replication
+
+By group size (data also in Figure 1a)
+note that only 1 group with 11 and no groups with 14
+
+pairX: 1.43
+pairSD: 1.56
+pairVar: 2.42
+pairN: 14
+
+trioX = 2.09
+trioSD = 1.81
+trioVar = 3.29	
+trioN = 11
+
+fourX = 2.71
+fourSD = 1.44
+fourVar = 2.07
+fourN = 14
+
+fiveX = 2.91
+fiveSD = 2.05
+fiveVar = 4.19
+fiveN = 21
+
+sixX = 2.60
+sixSD = 1.35
+sixVar = 1.82
+sixN = 10
+
+sevenX = 4.29
+sevenSD = 1.86
+sevenVar = 3.47
+sevenN = 17
+
+eightX = 3.80
+eightSD = 1.48
+eightVar = 2.18
+eightN = 10
+
+nineX = 3.75
+nineSD = 1.28
+nineVar = 1.64
+nineN = 8
+
+tenX = 3.89
+tenSD = 2.37
+tenVar = 5.61
+tenN = 9
+
+twelveX = 4.80
+twelveSD = 1.79
+twelveVar = 3.20
+twelveN = 5
+
+thirteenX = 4.33
+thirteenSD = 1.53
+thirteenVar = 2.33
+thirteenN = 3
+
+fifteenX = 4.50
+fifteenSD = 0.71
+fifteenVar = 0.50
+fifteenN = 2
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+NA
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+		### GREY-CROWNED BABBLER Pomatostomus temporalis ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Eguchi et al. 2007 ##
+
+location: Coomalie Farm, Northern Territory, Australia (13°0' S, 131°08' E)
+years: October 2002 to January 2005 (X breeding seasons)
+breeding season / study period: June to January (most of the breeding season)
+
+Figure 2 (data from 2003 to 2005)
+number of fledglings (unclear whether /year or /nest, but multiple broods not observed in this pop.)
+pairX: 0.00
+pairSD: sqrt(0.00) = 0.00
+pairVar: varianceEffect(0.00, 9) = 0.00
+pairN: 9
+
+trioX: 0.56
+trioSD: sqrt(0.81) = 0.90
+trioVar: varianceEffect(0.24, 14) = 0.81
+trioN: 14
+
+fourX: 0.86
+fourSD: sqrt(0.79) = 0.89
+fourVar: varianceEffect(0.23, 15) = 0.79
+fourN: 15
+
+fiveX: 0.51
+fiveSD: sqrt(0.27) = 0.51
+fiveVar: varianceEffect(0.21, 6) = 0.27
+fiveN: 6
+
+sixX: 1.16
+sixSD: sqrt(1.08) = 1.04
+sixVar: varianceEffect(0.3, 12) = 1.08
+sixN: 12
+
+
+## Eguchi pers. comm. (email received on 10.4.22) ##
+see 'RS babbler&vanga' .xlsx file in bet-hedging/data/rawData/Eguchi_x2
+note that 2007 excluded since N = 1 for pairs
+
+2003
+pairX: 0
+pairSD: 0
+pairVar: 0
+pairN: 4
+
+trioX: 1
+trioSD: 1
+trioVar: 1
+trioN: 5
+
+fourX: 0.40
+fourSD: 0.55
+fourVar: 0.30
+fourN: 5
+
+fiveX: 1.25
+fiveSD: 0.50
+fiveVar: 0.25
+fiveN: 4
+
+2004
+pairX: 0
+pairSD: 0 
+pairVar: 0 
+pairN: 2
+
+trioX: 1
+trioSD: 1
+trioVar: 1
+trioN: 3
+
+fourX: 1.33
+fourSD: 0.82
+fourVar: 0.67
+fourN: 6
+
+fiveX: 0.71
+fiveSD: 1.11
+fiveVar: 1.24
+fiveN: 7
+
+2005
+pairX: 0
+pairSD: 0 
+pairVar: 0
+pairN: 2
+
+trioX: 0
+trioSD: 0
+trioVar: 0
+trioN: 6
+
+fourX: 1
+fourSD: 1
+fourVar: 1
+fourN: 3
+
+fiveX: 1
+fiveSD: 1.1
+fiveVar: 1.2
+fiveN: 6
+
+2006
+pairX: 0.67
+pairSD: 1.15
+pairVar: 1.33
+pairN: 3
+
+trioX: 0.43
+trioSD: 1.13
+trioVar: 1.29
+trioN: 7
+
+fourX: 0
+fourSD: 0
+fourVar: 0
+fourN: 4
+
+fiveX: 0.75
+fiveSD: 0.96
+fiveVar: 0.92
+fiveN: 4
+
+
+# weighted averages
+
+pairX: ((0*4) + (0*2) + (0*2) + (0.67*3)) / (4+2+2+3) = 0.18
+pairSD: ((0*4) + (0*2) + (0*2) + (1.15*3)) / (4+2+2+3) = 0.31
+pairVar: ((0*4) + (0*2) + (0*2) + (1.33*3)) / (4+2+2+3) = 0.36
+pairN: 4 + 2 + 2 + 3 = 11
+
+trioX: ((1*5) + (1*3) + (0*6) + (0.43*7)) / (5+3+6+7) = 0.52
+trioSD: ((1*5) + (1*3) + (0*6) + (1.13*7)) / (5+3+6+7) = 0.76
+trioVar: ((1*5) + (1*3) + (0*6) + (1.29*7)) / (5+3+6+7) = 0.81
+trioN: 5 + 3 + 6 + 7 = 21
+
+fourX: ((0.40*5) + (1.33*6) + (1*3) + (0*4)) / (5+6+3+4) = 0.72
+fourSD: ((0.55*5) + (0.82*6) + (1*3) + (0*4)) / (5+6+3+4) = 0.59
+fourVar: ((0.30*5) + (0.67*6) + (1*3) + (0*4)) / (5+6+3+4) = 0.47
+fourN: 5 + 6 + 3 + 4 = 18
+
+fiveX: ((1.25*4) + (0.71*7) + (1*6) + (0.75*4)) / (4+7+6+4) = 0.90
+fiveSD: ((0.50*4) + (1.11*7) + (1.1*6) + (0.96*4)) / (4+7+6+4) = 0.96
+fiveVar: ((0.25*4) + (1.24*7) + (1.2*6) + (0.92*4)) / (4+7+6+4) = 0.98
+fiveN: 4 + 7 + 6 + 4 = 21
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Eguchi et al. 2007 ##
+
+Study location: Coomalie Farm, Northern Territory, Australia
+Study dates: 2002 to 2005
+
+Figure 1 (summed across years)
+Total = 10 + 18 + 19 + 11 + 11 + 3 + 2 + 1 = 75
+
+Group size	N	%
+2		10	13
+3		18	24
+4		19	25
+5		11	15
+6		11	15
+7		3	4
+8		2	3
+9		1	1
+
+Note that same study population as reproductive success data
+Note that only group sizes 2-5 entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+		### TIBETAN GROUND TIT Pseudopodoces humilis ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Zhao et al. 2019 ##
+
+location: Damxung County, Lhasa (30°28' N, 91°05' E) & Tianjun County, Qinghai (37°17' N, 99°06' E)
+years: May 2006 to July 2009 and May 2009 to July 2013, in each place (9 breeding seasons in total)
+breeding season / study period: May to July
+
+# combine values (since different sites)
+pairs <- c(6,1,4,5,6,6,3,5,4,6,4,6,0,5,3,4,4,3,4,5,3,0,3,5,3,5,6,5,3,4,5,2,3,5,4,5,5,6,4,5,8,0,4,8,4,6,5,6,0,0,5,7,5,7,0,0,6,4)
+
+trios <- c(5,4,0,0,5,6,5,4,6,0,0,4,5,3,2,5,4,6,4,6,7,5,3,7,7,6,7,7,7,8,5,6)
+fours <- c(5,5)
+fives <- c(4,6)
+
+pairX: mean(pairs) = 4.14
+pairSD: sd(pairs) = 2.04
+pairVar: var(pairs) = 4.16
+pairN: length(pairs) = 58
+
+trioX: mean(trios) = 4.66
+trioSD: sd(trios) = 2.25
+trioVar: var(trios) = 5.07
+trioN: length(trios) = 32
+
+fourX: mean(fours) = 5.0
+fourSD: sd(fours) = 0.0
+fourVar: var(fours) = 0.0
+fourN: length(fours) = 2
+
+fiveX: mean(fives) = 5.0
+fiveSD: sd(fives) = 1.41
+fiveVar: var(fives) = 2.0
+fiveN: length(fives) = 2
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Zhao et al. 2019 ##
+
+Study location: Damxung County & Tianjun County
+Study dates: 2006-2013
+
+Methods text: "27.2% (Damxung) – 47.1% (Tianjun) of breeding pairs have one or more helpers. Breeding pairs with helpers have one (85.4%), two (13.1%) or three (1.5%) male helpers..."
+Took average of Damxung and Tianjun = 37 % of pairs have helpers
+85.4% of 37% = 31% of pairs = 1 helper
+13.1% of 37% = 5% of pairs = 2 helper
+1.5% of 37% = 1% of pairs = 3 helper
+Total = NA
+
+Group size	N	%
+2		NA	63
+3		NA	31
+4		NA	5
+5		NA	1
+
+Note that same study population as reproductive success data
+Note that all group sizes entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+				### RUFOUS VANGA Schetba rufa ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Eguchi et al. 2002 ##
+location: Ampijoroa Forest Station, Ankarafantsika, Madagascar (16°15' S, 46°48' E)
+years: October 1994 to January 1999 (X breeding seasons)
+breeding season / study period: October to December
+
+
+## Eguchi pers. comm. (email received on 10.4.22) ##
+see 'RS babbler&vanga' .xlsx file in bet-hedging/data/rawData/Eguchi_x2
+note that 1994 excluded since N = 1 for trios (N = 1 for four & 5+ but don't need these for the pair vs trio contrast)
+
+1995
+pairX: 1.23
+pairSD: 1.36
+pairVar: 1.86
+pairN: 13
+
+trioX: 1.44
+trioSD: 1.51
+trioVar: 2.28
+trioN: 9
+
+fourX: NA
+fourSD: NA
+fourVar: NA
+fourN: NA
+
+five+X: NA
+five+SD: NA
+five+Var: NA
+five+N: NA
+
+1996
+pairX: 0.75
+pairSD: 0.93
+pairVar: 0.87
+pairN: 16
+
+trioX: 3.0
+trioSD: 1.0
+trioVar: 1.0
+trioN: 5
+
+fourX: 0
+fourSD: 0
+fourVar: 0
+fourN: 2
+
+five+X: 3
+five+SD: 1.41
+five+Var: 2
+five+N: 2
+
+1997
+pairX: 0
+pairSD: 0
+pairVar: 0
+pairN: 23
+
+trioX: 1.27
+trioSD: 1.68
+trioVar: 2.82
+trioN: 11
+
+fourX: 1
+fourSD: 1.55
+fourVar: 2.4
+fourN: 6
+
+five+X: 1.5
+five+SD: 2.12
+five+Var: 4.5
+five+N: 2
+
+
+Pooled group size estimates (i.e. pooled years)
+
+pairX: ((2*5)+(1.23*13)+(0.75*16)+(0*23)) / (5+13+16+23) = 0.67
+pairSD: ((1.87*5)+(1.36*13)+(0.93*16)+(0*23)) / (5+13+16+23) = 0.74
+pairVar: ((3.5*5)+(1.86*13)+(0.87*16)+(0*23)) / (5+13+16+23) = 0.98
+pairN: 5+13+16+23 = 57
+
+trioX: ((1.44*9)+(3*5)+(1.27*11)) / (9+5+11) = 1.68
+trioSD: ((1.51*9)+(1*5)+(1.68*11)) / (9+5+11) = 1.48
+trioVar: ((2.28*9)+(1*5)+(2.82*11)) / (9+5+11) = 2.26
+trioN: 9+5+11 = 25
+
+fourX: ((0.5*2)+(0*2)+(1*6)) / (2+2+6) = 0.7
+fourSD: ((0.71*2)+(0*2)+(1.55*6)) / (2+2+6) = 1.07
+fourVar: ((0.5*2)+(0*2)+(2.4*6)) / (2+2+6) = 1.54
+fourN: 2+2+6 = 10
+
+five+X: ((3*2)+(1.5*2)) / (2+2) = 2.25
+five+SD: ((1.41*2)+(2.12*2)) / (2+2) = 1.77
+five+Var: ((2*2)+(4.5*2)) / (2+2) = 3.25
+five+N: 2+2 = 4
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+## Asai et al. 2001 ##
+
+Study location: Ampijoroa Forest Station
+Study dates: 1994-2000
+
+Table 1
+Total = 158 + 39 + 41 + 13 = 251
+
+Group size	N	%
+2		158	63
+3		39	16
+4		41	16
+5		13	5
+
+Note that same study population as reproductive success data
+Note that all group sizes entered
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+			### TOUCAN BARBET Semnornis ramphastinus ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Restrepo & Mondragón 1998 ##
+
+location: Reserva Natural La Planada, Ricaurte, Nariño, Colombia (1°10' N, 78°00' W)
+years: February 1987 to September 1989 (3 breeding seasons)
+breeding season / study period: March to October (figure 5)
+
+data from two breeding attempts also reported; combined here by summing mean number produced, taking a weighted average of the SD and using first attempt n (since second attempts likely from pairs measured in the first attempt so not independent)
+
+pairX: 0.5 + 0.0 = 0.5
+pairSD: ((0.7*11) + (0.0*2)) / (11+2) = 0.59
+pairVar: 0.59^2 = 0.35
+pairN: 11 (2) = 11
+
+trioX: 1.2 + 1.3 = 2.5
+trioSD: ((0.4*5) + (0.6*3)) / (5+3) = 0.48
+trioVar: 0.48^2 = 0.23
+trioN: 5 (3) = 5
+
+fourX: 1.7 + 0.0 = 1.7
+fourSD: ((0.6*3) + (0.0*3)) / (3+3) = 0.3
+fourVar: 0.3^2 = 0.09
+fourN: 3  (3) = 3
+
+note that error is SD
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+NA - can't interpret Figure 4 in Restrepo & Mondragón (1998)
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+			### PYGMY NUTHATCH Sitta pygmaea ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Sydeman et al. 1988 ##
+
+location: Walnut Canyon National Monument (WCNM) & Coconino National Forest(CNF) near Flagstaff, Arizona, US (35°03' N, 111°32' W)
+years: November 1980 to August 1984 (7 breeding seasons)
+breeding season / study period: May to July
+
+Figure 2
+fledgling production per year
+
+pairX: 4.48
+pairSD: sqrt(4.69) = 2.17
+pairVar: varianceEffect((0.47/2), 85) = 4.69
+pairN: 85
+
+trioX: 5.21
+trioSD: sqrt(4.33) = 2.08
+trioVar: varianceEffect((0.65/2), 41) = 4.33
+trioN: 41
+
+fourX: 5.30
+fourSD: sqrt(3.08) = 1.76
+fourVar: varianceEffect((1.11/2), 10) = 3.08
+fourN: 10
+ 
+fiveX: 5.40
+fiveSD: sqrt(3.70) = 1.92
+fiveVar: varianceEffect((1.72/2), 5) = 3.70
+fiveN: 5
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-# 
+
+NA
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+			### APOSTLEBIRD Struthidea cinerea ###
+
+#-#-# REPRODUCTIVE SUCCESS #-#-# 
+
+## Woxvold 2004 ##
+
+location: central southern New South Wales, Australia (34°34' S, 145°45' E)
+years: August 1998 to January 2001 (3 breeding seasons)
+breeding season / study period: August to early January
+
+Figure 7
+number of fledglings per season
+three <- c(1, 1)
+four <- c(1, 2, 2, 3)
+five <- c(3, 3, 3, 4, 4, 6)
+six <- c(2, 2, 3, 4, 5, 6, 6, 6)
+seven <- c(2, 6)
+eight <- c(2, 5, 7)
+nine <- c(4, 5)
+ten <- c(5, 6, 7)
+twelve <- c(4, 7)
+fifteen <- c(7, 9)
+seventeen <- c(4, 7)
+
+trioX: 1
+trioSD: 0
+trioVar: 0
+trioN: 2
+
+fourX: 2
+fourSD: 0.82
+fourVar: 0.67
+fourN: 4
+
+fiveX: 3.83
+fiveSD: 1.17
+fiveVar: 1.37
+fiveN: 6
+
+sixX: 4.25
+sixSD: 1.75
+sixVar: 3.07
+sixN: 8
+
+sevenX: 4.00
+sevenSD: 2.83
+sevenVar: 8.00
+sevenN: 2
+
+eightX: 4.67
+eightSD: 2.52
+eightVar: 6.33
+eightN: 3
+
+nineX: 4.5
+nineSD: 0.71
+nineVar: 0.5
+nineN: 2
+
+tenX: 6
+tenSD: 1
+tenVar: 1
+tenN: 3
+
+twelveX: 5.5
+twelveSD: 2.12
+twelveVar: 4.5
+twelveN: 2
+
+fifteenX: 8.0
+fifteenSD: 1.41
+fifteenVar: 2
+fifteenN: 2
+
+seventeenX: 5.5
+seventeenSD: 2.12
+seventeenVar: 4.5
+seventeenN: 2
+
+
+#-#-# GROUP SIZE FREQUENCIES #-#-#
+
+## Woxvold 2004 ##
+
+Study location: central southern New South Wales, Australia
+Study dates: 1998 to 2001
+
+Figure 1
+Total = 4+8+8+12+4+7+3+3+1+3+1+2+2+1+2 = 61
+
+Group size	N	%
+2		0	0		
+3		4	7
+4		8	13
+5		8	13
+6		12	20
+7		4	7
+8		7	11
+9		3	5
+10		3	5
+11		1	2
+12		3	5
+13		1	2
+14		2	3
+15		2	3
+16		1	2
+17		2	3
+
+Note that same study population as reproductive success data
+Note that all relevant group sizes entered (those matching r.s. data)
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+					 # END #
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
